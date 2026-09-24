@@ -1,10 +1,18 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 
 import logo from "@/assets/logo.png";
+import { LibraryContext } from "@/context/LibraryProvider";
 
 const Navber = () => {
+
+      const {
+          addToTodaysPlan,
+          saveForLater
+      } = useContext(LibraryContext); 
+
   return (
     <nav className="bg-[#0d0f10] border-b border-gray-800">
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
@@ -55,7 +63,7 @@ const Navber = () => {
             <span>Plan</span>
 
             <span className="badge border-0 bg-lime-400 text-black font-bold w-6 h-6">
-              0
+              {addToTodaysPlan.length}
             </span>
           </Link>
 
@@ -66,7 +74,7 @@ const Navber = () => {
             <span>Saved</span>
 
             <span className="badge badge-outline text-gray-400 w-6 h-6">
-              0
+              {saveForLater.length}
             </span>
           </Link>
 
