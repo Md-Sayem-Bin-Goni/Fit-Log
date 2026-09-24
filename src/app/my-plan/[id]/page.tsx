@@ -1,15 +1,17 @@
+import AddToTodaysPlan from '@/components/button/AddToTodaysPlan';
+import SaveForLater from '@/components/button/SaveForLater';
 import { getAllLibrary } from '@/lib/library';
 import Image from 'next/image';
 import React from 'react';
 
-const LibraryDetailPage = async({params}) => {
+const LibraryDetailPage = async ({ params }) => {
 
-    const {id} = await params
-    const allLibrary = await getAllLibrary()
-    const library = allLibrary.find(library => library.id==id)
+  const { id } = await params
+  const allLibrary = await getAllLibrary()
+  const library = allLibrary.find(library => library.id == id)
 
-    return (
-         <section className="bg-[#0d0f12] text-white min-h-screen">
+  return (
+    <section className="bg-[#0d0f12] text-white min-h-screen">
       <div className="container mx-auto px-6 py-8">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -157,13 +159,10 @@ const LibraryDetailPage = async({params}) => {
             {/* Buttons */}
             <div className="flex gap-4 mt-8">
 
-              <button className="btn bg-lime-400 hover:bg-lime-300 border-none text-black">
-                ▣ Add to today's plan
-              </button>
+              <AddToTodaysPlan key={library.id} library={library} />
+              <SaveForLater key={library.id} library={library}/>
 
-              <button className="btn btn-outline border-gray-700 text-gray-300 hover:bg-gray-800">
-                ♧ Save for later
-              </button>
+
 
             </div>
 
@@ -172,7 +171,7 @@ const LibraryDetailPage = async({params}) => {
 
       </div>
     </section>
-    );
+  );
 };
 
 export default LibraryDetailPage;

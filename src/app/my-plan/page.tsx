@@ -1,11 +1,18 @@
+"use client"
+import saveForLater from "@/components/button/SaveForLater";
+import LibraryCard from "@/components/shared/LibraryCard";
+import SelectedLibraryCard from "@/components/shared/SelectedLibraryCard";
+import { LibraryContext } from "@/context/LibraryProvider";
 import { getAllLibrary } from "@/lib/library";
 import Link from "next/link";
-import React from "react";
- 
-const MyPlanPage = async() => {
+import React, { useContext } from "react";
 
-    const data = await getAllLibrary()
+const MyPlanPage = () => {
 
+    const { addToTodaysPlan, setAddToTodaysPlan } = useContext(LibraryContext)
+    const { saveForLater, setSaveForLater } = useContext(LibraryContext)
+    // const data = await getAllLibrary()
+    // console.log("MY PLAN DATA:", addToTodaysPlan);
     return (
         <main className="min-h-screen bg-[#0d0f12] text-white">
             <div className="container mx-auto px-6 py-8">
@@ -62,65 +69,89 @@ const MyPlanPage = async() => {
                 </div>
 
                 {/* Tabs + Sort */}
-                <div className="bg-[#111419] border border-[#252a31] rounded-lg px-4 py-2 flex items-center justify-between mb-5">
+                <div className="tabs tabs-lift">
 
-                    {/* Tabs */}
-                    {/* name of each tab group should be unique */}
-                    <div className="tabs tabs-lift">
-                        <input type="radio" name="my_tabs_3" className="tab" aria-label="Todays Plan" />
-                        <div className="tab-content bg-base-100 border-base-300 p-6">
-                            Tab content 1
-                        </div>
+                    {/* Today's Plan Tab */}
+                    <input
+                        type="radio"
+                        name="my_tabs_3"
+                        className="tab"
+                        aria-label="Todays Plan"
+                        defaultChecked
+                    />
 
-                        <input type="radio" name="my_tabs_3" className="tab" aria-label="Saved" defaultChecked />
-                        <div className="tab-content bg-base-100 border-base-300 p-6">
-                            Tab content 2
-                        </div>
+                    <div className="tab-content bg-base-100 border-base-300 p-6">
 
+                        {addToTodaysPlan.length > 0 ? (
+                            <div className=" gap-5">
+                                {addToTodaysPlan.map((library) => (
+                                    <SelectedLibraryCard
+                                        key={library.id}
+                                        library={library}
+                                    />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="py-16 text-center">
+                                <h2 className="text-xl font-bold uppercase">
+                                    Nothing Here Yet
+                                </h2>
+
+                                <p className="text-gray-500 text-sm mt-2">
+                                    Browse the library and add a lift to get today moving.
+                                </p>
+
+                                <Link href="/">
+                                    <button className="btn bg-lime-400 text-black border-none mt-5">
+                                        Go to workouts
+                                    </button>
+                                </Link>
+                            </div>
+                        )}
 
                     </div>
 
-                    {/* Sort */}
-                    <div className="flex items-center gap-3">
 
-                        <span className="text-xs text-gray-500">
-                            Sort By
-                        </span>
+                    {/* Saved Tab */}
+                    <input
+                        type="radio"
+                        name="my_tabs_3"
+                        className="tab"
+                        aria-label="Saved"
+                    />
 
-                        <select
-                            defaultValue="duration"
-                            className="select select-sm bg-[#171b22] border-[#303640] text-gray-300 focus:outline-none"
-                        >
-                            <option value="duration">Duration</option>
-                            <option value="calories">Calories</option>
-                            <option value="rating">Rating</option>
-                        </select>
+                    <div className="tab-content bg-base-100 border-base-300 p-6">
+                        {saveForLater.length > 0 ? (
+                            <div className=" gap-5">
+                                {saveForLater.map((library) => (
+                                    <SelectedLibraryCard
+                                        key={library.id}
+                                        library={library}
+                                    />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="py-16 text-center">
+                                <h2 className="text-xl font-bold uppercase">
+                                    Nothing Here Yet
+                                </h2>
 
+                                <p className="text-gray-500 text-sm mt-2">
+                                    Browse the library and add a lift to get today moving.
+                                </p>
+
+                                <Link href="/">
+                                    <button className="btn bg-lime-400 text-black border-none mt-5">
+                                        Go to workouts
+                                    </button>
+                                </Link>
+                            </div>
+                        )}
                     </div>
+
                 </div>
 
-                {/* Empty State */}
-                <div className="min-h-[330px] bg-[#0f1115] border border-[#252a31] rounded-lg flex items-center justify-center">
 
-                    <div className="text-center">
-
-                        <h2 className="text-xl font-bold uppercase">
-                            Nothing Here Yet
-                        </h2>
-
-                        <p className="text-gray-500 text-sm mt-1">
-                            Browse the library and add a lift to get today moving.
-                        </p>
-
-                        <Link href="/">
-                            <button className="btn bg-lime-400 hover:bg-lime-300 border-none text-black rounded-full px-7 mt-5">
-                                Go to workouts
-                            </button>
-                        </Link>
-
-                    </div>
-
-                </div>
 
             </div>
         </main>
