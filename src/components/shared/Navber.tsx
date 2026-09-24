@@ -49,7 +49,7 @@ const Navber = () => {
         <div className="flex items-center gap-7">
 
           <Link
-            href="/plan"
+            href="/my-plan"
             className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition"
           >
             <span>Plan</span>
@@ -60,7 +60,7 @@ const Navber = () => {
           </Link>
 
           <Link
-            href="/saved"
+            href="/my-plan"
             className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition"
           >
             <span>Saved</span>
