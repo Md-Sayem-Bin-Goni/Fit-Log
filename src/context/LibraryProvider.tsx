@@ -14,13 +14,13 @@ const LibraryProvider = ({ children }) => {
     const [saveForLater, setSaveForLater] = useState([])
 
     const shareData = {
-addToTodaysPlan,
+        addToTodaysPlan,
         setAddToTodaysPlan,
         saveForLater,
         setSaveForLater
     }
-        
-    
+
+
     return (
         <LibraryContext.Provider value={shareData}>
             {children}

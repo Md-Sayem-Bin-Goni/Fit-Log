@@ -10,8 +10,6 @@ const HomePage = () => {
 
       <Banner />
       <TheLibrary />
-      <ToastContainer />
-
 
     </div>
   );

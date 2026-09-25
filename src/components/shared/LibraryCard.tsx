@@ -8,6 +8,7 @@ const LibraryCard = ({ library }) => {
     <Link
       href={`/my-plan/${library.id}`}
       className=""
+      
     >
       <div className="card bg-[#15171c] border border-[#2a2d33] overflow-hidden">
 

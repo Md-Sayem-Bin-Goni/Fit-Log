@@ -11,15 +11,29 @@ const AddToTodaysPlan = ({ library }) => {
 
 
     const handleAddToTodaysPlan = () => {
+
+
+         if (isAdded) {
+                    toast.error("Already Added!");
+                    return;
+                }
+
+                
         setAddToTodaysPlan([...addToTodaysPlan, library])
         setIsAdded(true)
+        toast.success(`Added to Todays Plan`)
     }
 
     return (
         <button
             onClick={handleAddToTodaysPlan}
-            disabled={isAdded}
-            className="btn bg-lime-400 hover:bg-lime-300 border-none text-black"
+             className={`btn border-none text-black
+                ${
+                    isAdded
+                        ? "bg-gray-300 cursor-not-allowed"
+                        : "bg-lime-400 hover:bg-lime-300"
+                }
+            `}
             >
             {isAdded ? "Added to Plan" : "Add to Today's Plan"}
         </button>

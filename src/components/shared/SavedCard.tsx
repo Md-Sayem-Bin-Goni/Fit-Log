@@ -1,8 +1,21 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import SaveForLater from "../button/SaveForLater";
+import { LibraryContext } from "@/context/LibraryProvider";
 
 const SelectedLibraryCard = ({ library }) => {
+
+    const { saveForLater, setSaveForLater } = useContext(LibraryContext);
+
+
+    const handleRemove = () => {
+        const bakiPlan = saveForLater.filter(baki => baki.id !== library.id)
+        setSaveForLater(bakiPlan)
+    }
+
+
     return (
         <div className="card bg-[#15181e] border border-[#2a2f38] rounded-2xl">
             <div className="p-5 flex items-center justify-between gap-6">
@@ -68,7 +81,9 @@ const SelectedLibraryCard = ({ library }) => {
                     </Link>
 
                     {/* Remove */}
-                    <button className="btn btn-ghost btn-circle text-gray-500 text-xl">
+                    <button
+                        onClick={handleRemove}
+                        className="btn btn-ghost btn-circle text-gray-500 text-xl">
                         ✕
                     </button>
 
