@@ -5,9 +5,7 @@ import { ILibrary } from '@/types/library';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const SaveForLater = ({ library } :  {
-  library: ILibrary
-}) => {
+const SaveForLater = ({ library } :  {library: ILibrary}) => {
 
     const { saveForLater, setSaveForLater } = useContext(LibraryContext);
 
@@ -15,17 +13,13 @@ const SaveForLater = ({ library } :  {
 
     const handleAddToSaveForLater = () => {
 
-        // আগে add করা থাকলে
         if (isAdded) {
             toast.error("Already Saved!");
             return;
         }
 
-        // প্রথমবার add
         setSaveForLater([...saveForLater,library]);
-
         setIsAdded(true);
-
         toast.success("Added to Save for Later");
     };
 

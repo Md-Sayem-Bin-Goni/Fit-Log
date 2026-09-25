@@ -52,33 +52,28 @@ const MyPlanPage = () => {
     // =====================================================
     // 6. Sort State
     // =====================================================
-    const [sortBy, setSortBy] = useState<
-        "Duration" | "Calories" | "Rating"
-    >("Duration");
+    const [sortBy, setSortBy] = useState<"Duration" | "Calories" | "Rating"> ("Duration");
 
 
     // =====================================================
     // 7. Sort Function
     // =====================================================
-    const sortLibrary = ( library : ILibrary[] ) => {
+    const sortLibrary = (library: ILibrary[]) => {
 
         // original array change না করার জন্য copy
         const sortedLibrary = [...library];
 
         if (sortBy === "Duration") {
-
             sortedLibrary.sort(
                 (a, b) => a.duration - b.duration
             );
 
         } else if (sortBy === "Calories") {
-
             sortedLibrary.sort(
                 (a, b) => a.caloriesBurned - b.caloriesBurned
             );
 
         } else if (sortBy === "Rating") {
-
             sortedLibrary.sort(
                 (a, b) => b.rating - a.rating
             );
@@ -196,8 +191,7 @@ const MyPlanPage = () => {
                                     ? "tab-active bg-[#20252d] text-white"
                                     : "text-gray-500"
                                     }`}
-                            >
-                                Today's Plan
+                            > Today's Plan
                             </button>
 
 

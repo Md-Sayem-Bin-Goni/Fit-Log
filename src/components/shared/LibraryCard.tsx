@@ -3,15 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const LibraryCard = ({ library } :  {library: ILibrary}) => {
+const LibraryCard = ({ library }: { library: ILibrary }) => {
   return (
 
     <Link
-      href={`/my-plan/${library.id}`}
-      className=""
-      
+      href={`/my-plan/${library.id}`}  
+
+
     >
-      <div className="card bg-[#15171c] border border-[#2a2d33] overflow-hidden">
+      <div
+        className="card bg-[#15171c] border border-[#2a2d33] overflow-hidden  hover:border-lime-400 hover:shadow-lg hover:shadow-lime-400/20">
 
         {/* Workout Image */}
         <figure className="h-[180px]">
@@ -75,7 +76,6 @@ const LibraryCard = ({ library } :  {library: ILibrary}) => {
       </div>
 
     </Link>
-
 
 
   );

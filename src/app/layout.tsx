@@ -29,14 +29,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
 
-       <LibraryProvider>
-         <Navber />
+        <LibraryProvider>
 
-        {children}
-             <ToastContainer />
-
-        <Footer />
-       </LibraryProvider>
+          <Navber />
+          {children}
+          <ToastContainer />
+          <Footer />
+          
+        </LibraryProvider>
       </body>
     </html>
   );

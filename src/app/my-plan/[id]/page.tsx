@@ -7,7 +7,7 @@ import React from 'react';
 
 
 interface ILibraryDetailPageprops {
-params : Promise <{id: string}>
+  params : Promise <{id: string}>
 }
 
 const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {

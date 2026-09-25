@@ -6,12 +6,9 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
-const SelectedLibraryCard = ({ library } :  {
-  library: ILibrary
-}) => {
+const SelectedLibraryCard = ({ library } :  {library: ILibrary}) => {
 
     const { addToTodaysPlan, setAddToTodaysPlan } = useContext(LibraryContext);
-
 
     const handleRemove = () => {
         const bakiPlan = addToTodaysPlan.filter(baki => baki.id !== library.id)
@@ -20,11 +17,11 @@ const SelectedLibraryCard = ({ library } :  {
     }
 
     const [markasdone, setmarkasdone] = useState(false)
+
     const handleMarkAsDone = () => {
         setmarkasdone(true)
         toast.success('Done')
     }
-
 
     return (
         <div className="card bg-[#15181e] border border-[#2a2f38] rounded-2xl">

@@ -6,9 +6,10 @@ import { ILibrary } from '@/types/library';
 const TheLibrary = async () => {
 
     const data = await getAllLibrary()
+    
     return (
         <div className='container mx-auto px-10'>
-            <div className='py-1'>
+            <div className='py-15'>
                 <h2 className='font-bold text-4xl'>The Library</h2>
                 <p>Twelve lifts covering every major muscle group.</p>
             </div>

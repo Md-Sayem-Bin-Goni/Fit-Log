@@ -2,7 +2,6 @@
 import React, { createContext, Dispatch, SetStateAction, useState } from 'react';
 import { ILibrary } from '@/types/library';
 
-
 interface LibraryContextType {
   addToTodaysPlan: ILibrary[];
   setAddToTodaysPlan: Dispatch<SetStateAction<ILibrary[]>>;
@@ -29,7 +28,6 @@ const LibraryProvider = ({ children }: { children: React.ReactNode }) => {
         saveForLater,
         setSaveForLater
     }
-
 
     return (
         <LibraryContext.Provider value={shareData}>

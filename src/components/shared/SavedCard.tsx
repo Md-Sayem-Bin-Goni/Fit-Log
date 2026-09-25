@@ -7,18 +7,15 @@ import { LibraryContext } from "@/context/LibraryProvider";
 import { toast } from "react-toastify";
 import { ILibrary } from "@/types/library";
 
-const SelectedLibraryCard = ({ library } :  {
-  library: ILibrary
-}) => {
+const SelectedLibraryCard = ({ library }: { library: ILibrary }) => {
 
     const { saveForLater, setSaveForLater } = useContext(LibraryContext);
-
 
     const handleRemove = () => {
         const bakiPlan = saveForLater.filter(baki => baki.id !== library.id)
         setSaveForLater(bakiPlan)
-                toast.info("Deleted")
-        
+        toast.info("Deleted")
+
     }
 
 
