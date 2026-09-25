@@ -160,7 +160,7 @@ const LibraryDetailPage = async ({ params }) => {
             <div className="flex gap-4 mt-8">
 
               <AddToTodaysPlan key={library.id} library={library} />
-              <SaveForLater key={library.id} library={library}/>
+              <SaveForLater key={library.name} library={library}/>
 
 
 

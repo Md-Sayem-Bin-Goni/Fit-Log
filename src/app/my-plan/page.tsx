@@ -65,16 +65,40 @@ const MyPlanPage = () => {
     );
 
 
-    return (
-        <main className="min-h-screen bg-[#0d0f12] text-white">
 
+    const [sortBy, setSortBy] = useState<'Duration' | 'Calories' | 'Rating'>('Duration')
+
+
+
+    const sortLibrary = (library) => {
+        const sortedLibrary = [...library]
+
+        if (sortBy === "Duration") {
+            sortedLibrary.sort((a, b) => a.duration - b.duration)
+        }
+        else if (sortBy === "Calories") {
+            sortedLibrary.sort((a, b) => a.caloriesBurned - b.caloriesBurned)
+        }
+        else if (sortBy === 'Rating') {
+            sortedLibrary.sort((a, b) => b.rating - a.rating)
+        }
+
+        return sortedLibrary
+
+    }
+
+    // const sortedAddToTodaysPlan = sortLibrary(addToTodaysPlan)
+    // const sortedSaveForLater = sortLibrary(saveForLater)
+    const sortedLibraries = sortLibrary(currentLibraries);
+
+
+    return (
+
+        <main className="min-h-screen bg-[#0d0f12] text-white">
             <div className="container mx-auto px-6 py-8">
 
-                {/* =================================================
-                    PAGE HEADING
-                ================================================= */}
+                {/* ================= PAGE HEADING ================= */}
                 <div className="mb-6">
-
                     <h1 className="text-3xl font-bold uppercase">
                         My Plan
                     </h1>
@@ -82,26 +106,16 @@ const MyPlanPage = () => {
                     <p className="text-sm text-gray-500 mt-1">
                         Cap of five lifts for today. Finish them, then load more.
                     </p>
-
                 </div>
 
 
-                {/* =================================================
-                    STATISTICS SECTION
-                    Active tab অনুযায়ী data change হবে
-                ================================================= */}
+                {/* ================= STATISTICS ================= */}
                 <div className="bg-[#15181e] border border-[#252a31] rounded-lg p-7 mb-5">
 
                     <div className="grid grid-cols-3">
 
-                        {/* ===============================
-                            EXERCISES
-                            
-                            .length দিয়ে কতগুলো workout
-                            আছে সেটা দেখাচ্ছি
-                        =============================== */}
+                        {/* Exercises */}
                         <div className="border-r border-[#292d33]">
-
                             <p className="text-xs text-gray-500 mb-1">
                                 Exercises
                             </p>
@@ -109,18 +123,11 @@ const MyPlanPage = () => {
                             <h2 className="text-3xl font-bold text-lime-400">
                                 {currentLibraries.length}
                             </h2>
-
                         </div>
 
 
-                        {/* ===============================
-                            MINUTES
-
-                            সব workout-এর duration
-                            যোগ করে totalMinutes পেয়েছি
-                        =============================== */}
+                        {/* Minutes */}
                         <div className="border-r border-[#292d33] pl-8">
-
                             <p className="text-xs text-gray-500 mb-1">
                                 Minutes
                             </p>
@@ -128,18 +135,11 @@ const MyPlanPage = () => {
                             <h2 className="text-3xl font-bold">
                                 {totalMinutes}
                             </h2>
-
                         </div>
 
 
-                        {/* ===============================
-                            CALORIES
-
-                            সব workout-এর caloriesBurned
-                            যোগ করে totalCalories পেয়েছি
-                        =============================== */}
+                        {/* Calories */}
                         <div className="pl-8">
-
                             <p className="text-xs text-gray-500 mb-1">
                                 Calories
                             </p>
@@ -147,147 +147,122 @@ const MyPlanPage = () => {
                             <h2 className="text-3xl font-bold">
                                 {totalCalories}
                             </h2>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                {/* ================= TAB + SORT SECTION ================= */}
+                <div className="bg-[#111419] border border-[#252a31] rounded-lg">
+
+                    {/* Top Bar */}
+                    <div className="flex items-center justify-between px-4 pt-2">
+
+                        {/* Tab Buttons */}
+                        <div role="tablist" className="tabs tabs-box bg-transparent">
+
+                            <button
+                                role="tab"
+                                onClick={() => setActiveTab("today")}
+                                className={`tab ${activeTab === "today"
+                                    ? "tab-active bg-[#20252d] text-white"
+                                    : "text-gray-500"
+                                    }`}
+                            >
+                                Today's Plan
+                            </button>
+
+                            <button
+                                role="tab"
+                                onClick={() => setActiveTab("saved")}
+                                className={`tab ${activeTab === "saved"
+                                    ? "tab-active bg-[#20252d] text-white"
+                                    : "text-gray-500"
+                                    }`}
+                            >
+                                Saved
+                            </button>
+
+                        </div>
+
+
+                        {/* Sort */}
+                        <div className="flex items-center gap-3">
+
+                            <span className="text-xs text-gray-500">
+                                Sort By
+                            </span>
+
+                            <select
+
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value as 'Duration' | 'Calories' | 'Rating')}
+                                className="select select-sm bg-[#171b22] border-[#303640]"
+                            >
+                                <option value="Duration">
+                                    Duration
+                                </option>
+
+                                <option value="Calories">
+                                    Calories
+                                </option>
+
+                                <option value="Rating">
+                                    Rating
+                                </option>
+                            </select>
 
                         </div>
 
                     </div>
 
-                </div>
 
+                    {/* ================= TAB CONTENT ================= */}
+                    <div className="p-5">
 
-                {/* =================================================
-                    DAISYUI TABS
-                ================================================= */}
-                <div className="tabs tabs-lift">
+                        {currentLibraries.length > 0 ? (
 
-
-                    {/* =================================================
-                        TODAY'S PLAN TAB BUTTON
-
-                        Click/change হলে activeTab = "today"
-                    ================================================= */}
-                    <input
-                        type="radio"
-                        name="my_tabs_3"
-                        className="tab"
-                        aria-label="Todays Plan"
-                        defaultChecked
-                        onChange={() => setActiveTab("today")}
-                    />
-
-
-                    {/* =================================================
-                        TODAY'S PLAN CONTENT
-                    ================================================= */}
-                    <div className="tab-content bg-base-100 border-base-300 p-6">
-
-                        {/* 
-                            যদি Today's Plan-এ workout থাকে
-                            তাহলে cards দেখাবো
-                        */}
-                        {addToTodaysPlan.length > 0 ? (
-
+                            /* Workout থাকলে card দেখাবে */
                             <div className="flex flex-col gap-4">
 
-                                {addToTodaysPlan.map((library) => (
-
+                                {sortedLibraries.map((library) => (
                                     <SelectedLibraryCard
                                         key={library.id}
                                         library={library}
                                     />
-
                                 ))}
 
                             </div>
 
                         ) : (
 
-                            /* 
-                                কোনো workout না থাকলে
-                                Empty State দেখাবে
-                            */
-                            <div className="py-16 text-center">
+                            /* Workout না থাকলে Empty State */
+                            <div className="min-h-[300px] flex items-center justify-center">
 
-                                <h2 className="text-xl font-bold uppercase">
-                                    Nothing Here Yet
-                                </h2>
+                                <div className="text-center">
 
-                                <p className="text-gray-500 text-sm mt-2">
-                                    Browse the library and add a lift to get today moving.
-                                </p>
+                                    <h2 className="text-xl font-bold uppercase">
+                                        {activeTab === "today"
+                                            ? "Nothing Here Yet"
+                                            : "Nothing Saved Yet"}
+                                    </h2>
 
-                                <Link href="/">
+                                    <p className="text-gray-500 text-sm mt-2">
 
-                                    <button className="btn bg-lime-400 hover:bg-lime-300 text-black border-none mt-5">
-                                        Go to workouts
-                                    </button>
+                                        {activeTab === "today"
+                                            ? "Browse the library and add a lift to get today moving."
+                                            : "Save workouts from the library to find them here."}
 
-                                </Link>
+                                    </p>
 
-                            </div>
+                                    <Link href="/">
+                                        <button className="btn bg-lime-400 hover:bg-lime-300 border-none text-black mt-5">
+                                            Go to workouts
+                                        </button>
+                                    </Link>
 
-                        )}
-
-                    </div>
-
-
-                    {/* =================================================
-                        SAVED TAB BUTTON
-
-                        Click/change হলে activeTab = "saved"
-                    ================================================= */}
-                    <input
-                        type="radio"
-                        name="my_tabs_3"
-                        className="tab"
-                        aria-label="Saved"
-                        onChange={() => setActiveTab("saved")}
-                    />
-
-
-                    {/* =================================================
-                        SAVED TAB CONTENT
-                    ================================================= */}
-                    <div className="tab-content bg-base-100 border-base-300 p-6">
-
-                        {/* 
-                            Saved workout থাকলে cards দেখাবে
-                        */}
-                        {saveForLater.length > 0 ? (
-
-                            <div className="flex flex-col gap-4">
-
-                                {saveForLater.map((library) => (
-
-                                    <SelectedLibraryCard
-                                        key={library.id}
-                                        library={library}
-                                    />
-
-                                ))}
-
-                            </div>
-
-                        ) : (
-
-                            /* Saved list empty হলে এটা দেখাবে */
-                            <div className="py-16 text-center">
-
-                                <h2 className="text-xl font-bold uppercase">
-                                    Nothing Saved Yet
-                                </h2>
-
-                                <p className="text-gray-500 text-sm mt-2">
-                                    Save workouts from the library to find them here.
-                                </p>
-
-                                <Link href="/">
-
-                                    <button className="btn bg-lime-400 hover:bg-lime-300 text-black border-none mt-5">
-                                        Browse Workouts
-                                    </button>
-
-                                </Link>
+                                </div>
 
                             </div>
 
@@ -298,9 +273,9 @@ const MyPlanPage = () => {
                 </div>
 
             </div>
-
         </main>
     );
+
 };
 
 export default MyPlanPage;
