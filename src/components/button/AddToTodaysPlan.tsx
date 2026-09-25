@@ -17,6 +17,11 @@ const AddToTodaysPlan = ({ library }: { library: ILibrary }) => {
             return;
         }
 
+        if (addToTodaysPlan.length > 5)
+        {
+            toast.error("You reached daily limit")
+        }
+
 
         setAddToTodaysPlan([...addToTodaysPlan, library])
         setIsAdded(true)

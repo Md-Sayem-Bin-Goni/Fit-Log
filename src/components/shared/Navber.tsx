@@ -22,15 +22,7 @@ const Navber = () => {
 
       <div className="container mx-auto px-4 sm:px-6">
 
-        <div className="
-      min-h-20
-      flex flex-wrap
-      items-center
-      justify-between
-      gap-y-3
-      py-3
-      md:flex-nowrap
-      md:py-0
+        <div className="min-h-20 flex flex-wrap items-center justify-between gap-y-3  py-3 md:flex-nowrap md:py-0
     ">
 
           {/* Logo */}
