@@ -4,8 +4,12 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import SaveForLater from "../button/SaveForLater";
 import { LibraryContext } from "@/context/LibraryProvider";
+import { toast } from "react-toastify";
+import { ILibrary } from "@/types/library";
 
-const SelectedLibraryCard = ({ library }) => {
+const SelectedLibraryCard = ({ library } :  {
+  library: ILibrary
+}) => {
 
     const { saveForLater, setSaveForLater } = useContext(LibraryContext);
 
@@ -13,6 +17,8 @@ const SelectedLibraryCard = ({ library }) => {
     const handleRemove = () => {
         const bakiPlan = saveForLater.filter(baki => baki.id !== library.id)
         setSaveForLater(bakiPlan)
+                toast.info("Deleted")
+        
     }
 
 

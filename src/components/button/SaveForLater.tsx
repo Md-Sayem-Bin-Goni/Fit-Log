@@ -1,10 +1,13 @@
 'use client'
 
 import { LibraryContext } from '@/context/LibraryProvider';
+import { ILibrary } from '@/types/library';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const SaveForLater = ({ library }) => {
+const SaveForLater = ({ library } :  {
+  library: ILibrary
+}) => {
 
     const { saveForLater, setSaveForLater } = useContext(LibraryContext);
 

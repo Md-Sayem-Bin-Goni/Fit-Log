@@ -1,9 +1,12 @@
 'use client'
 import { LibraryContext } from '@/context/LibraryProvider';
+import { ILibrary } from '@/types/library';
 import React, { useContext, useState } from 'react';
 import { Bounce, toast } from 'react-toastify';
 
-const AddToTodaysPlan = ({ library }) => {
+const AddToTodaysPlan = ({ library } :  {
+  library: ILibrary
+}) => {
 
     const { addToTodaysPlan, setAddToTodaysPlan } = useContext(LibraryContext)
 

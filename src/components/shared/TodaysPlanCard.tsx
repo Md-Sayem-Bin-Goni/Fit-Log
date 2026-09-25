@@ -1,10 +1,14 @@
 'use client'
 import { LibraryContext } from "@/context/LibraryProvider";
+import { ILibrary } from "@/types/library";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
-const SelectedLibraryCard = ({ library }) => {
+const SelectedLibraryCard = ({ library } :  {
+  library: ILibrary
+}) => {
 
     const { addToTodaysPlan, setAddToTodaysPlan } = useContext(LibraryContext);
 
@@ -12,6 +16,13 @@ const SelectedLibraryCard = ({ library }) => {
     const handleRemove = () => {
         const bakiPlan = addToTodaysPlan.filter(baki => baki.id !== library.id)
         setAddToTodaysPlan(bakiPlan)
+        toast.info("Deleted")
+    }
+
+    const [markasdone, setmarkasdone] = useState(false)
+    const handleMarkAsDone = () => {
+        setmarkasdone(true)
+        toast.success('Done')
     }
 
 
@@ -80,11 +91,16 @@ const SelectedLibraryCard = ({ library }) => {
                     </Link>
 
 
-                    <Link href={`/my-plan/${library.id}`}>
-                        <button className="btn btn-outline rounded-full px-7 border-gray-600 text-gray-200">
-                            Mark as Done
-                        </button>
-                    </Link>
+
+                    <button
+                        onClick={handleMarkAsDone}
+                        className={markasdone ? "btn btn-outline rounded-full px-7 border-green-600 text-green-200" :
+                            "btn btn-outline rounded-full px-7 border-gray-600 text-gray-200"}
+                    >
+
+                        {markasdone ? 'Done' : "Mark as Done"}
+                    </button>
+
 
                     {/* Remove */}
                     <button

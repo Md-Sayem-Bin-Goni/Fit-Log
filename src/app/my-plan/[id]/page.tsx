@@ -1,14 +1,20 @@
 import AddToTodaysPlan from '@/components/button/AddToTodaysPlan';
 import SaveForLater from '@/components/button/SaveForLater';
 import { getAllLibrary } from '@/lib/library';
+import { ILibrary } from '@/types/library';
 import Image from 'next/image';
 import React from 'react';
 
-const LibraryDetailPage = async ({ params }) => {
+
+interface ILibraryDetailPageprops {
+params : Promise <{id: string}>
+}
+
+const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
 
   const { id } = await params
   const allLibrary = await getAllLibrary()
-  const library = allLibrary.find(library => library.id == id)
+  const library = allLibrary.find((library : ILibrary) => library.id === Number(id))
 
   return (
     <section className="bg-[#0d0f12] text-white min-h-screen">
@@ -44,9 +50,9 @@ const LibraryDetailPage = async ({ params }) => {
 
             {/* Muscle Groups */}
             <div className="flex gap-2 mt-4">
-              {library.muscleGroups.map((muscle) => (
+              {library.muscleGroups.map((muscle: [], idx: number) => (
                 <span
-                  key={muscle}
+                  key={idx}
                   className="badge bg-lime-400 border-none text-black font-bold text-xs"
                 >
                   {muscle}
@@ -146,7 +152,7 @@ const LibraryDetailPage = async ({ params }) => {
               </h2>
 
               <ol className="list-decimal list-inside mt-4 space-y-3 text-gray-400 text-sm">
-                {library.instructions.map((instruction, index) => (
+                {library.instructions.map((instruction : [], index: number) => (
                   <li key={index}>
                     {instruction}
                   </li>

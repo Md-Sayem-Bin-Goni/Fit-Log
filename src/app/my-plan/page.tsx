@@ -6,6 +6,7 @@ import Link from "next/link";
 import { LibraryContext } from "@/context/LibraryProvider";
 import TodaysPlanCard from "@/components/shared/TodaysPlanCard";
 import SavedCard from "@/components/shared/SavedCard";
+import { ILibrary } from "@/types/library";
 
 const MyPlanPage = () => {
 
@@ -27,10 +28,7 @@ const MyPlanPage = () => {
     // =====================================================
     // 3. Active tab অনুযায়ী libraries
     // =====================================================
-    const currentLibraries =
-        activeTab === "today"
-            ? addToTodaysPlan
-            : saveForLater;
+    const currentLibraries = activeTab === "today" ? addToTodaysPlan : saveForLater;
 
 
     // =====================================================
@@ -62,7 +60,7 @@ const MyPlanPage = () => {
     // =====================================================
     // 7. Sort Function
     // =====================================================
-    const sortLibrary = (library) => {
+    const sortLibrary = ( library : ILibrary[] ) => {
 
         // original array change না করার জন্য copy
         const sortedLibrary = [...library];
@@ -194,11 +192,10 @@ const MyPlanPage = () => {
                             <button
                                 role="tab"
                                 onClick={() => setActiveTab("today")}
-                                className={`tab ${
-                                    activeTab === "today"
-                                        ? "tab-active bg-[#20252d] text-white"
-                                        : "text-gray-500"
-                                }`}
+                                className={`tab ${activeTab === "today"
+                                    ? "tab-active bg-[#20252d] text-white"
+                                    : "text-gray-500"
+                                    }`}
                             >
                                 Today's Plan
                             </button>
@@ -209,11 +206,10 @@ const MyPlanPage = () => {
                             <button
                                 role="tab"
                                 onClick={() => setActiveTab("saved")}
-                                className={`tab ${
-                                    activeTab === "saved"
-                                        ? "tab-active bg-[#20252d] text-white"
-                                        : "text-gray-500"
-                                }`}
+                                className={`tab ${activeTab === "saved"
+                                    ? "tab-active bg-[#20252d] text-white"
+                                    : "text-gray-500"
+                                    }`}
                             >
                                 Saved
                             </button>
@@ -234,9 +230,9 @@ const MyPlanPage = () => {
                                 onChange={(e) =>
                                     setSortBy(
                                         e.target.value as
-                                            | "Duration"
-                                            | "Calories"
-                                            | "Rating"
+                                        | "Duration"
+                                        | "Calories"
+                                        | "Rating"
                                     )
                                 }
                                 className="select select-sm bg-[#171b22] border-[#303640]"
