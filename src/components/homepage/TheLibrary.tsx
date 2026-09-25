@@ -14,7 +14,7 @@ const TheLibrary = async () => {
                 <p>Twelve lifts covering every major muscle group.</p>
             </div>
             {
-                <div className='grid grid-cols-3 gap-10 '>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 lg:gap-10" >
                     {
                         data.map((library : ILibrary, idx: number) => {
                             return <LibraryCard key={library.id} library={library}></LibraryCard>

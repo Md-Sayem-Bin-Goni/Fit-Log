@@ -15,92 +15,129 @@ const Navber = () => {
     saveForLater
   } = useContext(LibraryContext);
 
-  // বর্তমানে কোন URL/route-এ আছি
   const pathname = usePathname();
 
   return (
-    <nav className="bg-[#0d0f10] border-b border-gray-800 sticky top-0 z-50 bg-black border-b border-gray-800">
+    <nav className="bg-[#0d0f10] border-b border-gray-800 sticky top-0 z-50">
 
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
+        <div className="
+      min-h-20
+      flex flex-wrap
+      items-center
+      justify-between
+      gap-y-3
+      py-3
+      md:flex-nowrap
+      md:py-0
+    ">
 
-          <Image
-            src={logo}
-            alt="FITLOG Logo"
-            width={28}
-            height={28}
-            className="object-contain"
-          />
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-3">
 
-          <h2 className="text-white text-xl font-bold tracking-wider">
-            FITLOG
-          </h2>
+            <Image
+              src={logo}
+              alt="FITLOG Logo"
+              width={28}
+              height={28}
+              className="object-contain"
+            />
 
-        </Link>
+            <h2 className="text-white text-lg sm:text-xl font-bold tracking-wider">
+              FITLOG
+            </h2>
 
-
-        {/* Middle Menu */}
-        <ul className="flex items-center gap-3 text-sm">
-
-          {/* Workouts */}
-          <li>
-            <Link
-              href="/"
-              className={
-                pathname === "/"
-                  ? "px-5 py-2 rounded-full bg-lime-950 text-lime-400 font-medium"
-                  : "px-5 py-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition"
-              }
-            >
-              Workouts
-            </Link>
-          </li>
+          </Link>
 
 
-          {/* My Plan */}
-          <li>
+          {/* Middle Menu */}
+          <ul className="
+        order-3
+        w-full
+        flex
+        items-center
+        justify-center
+        gap-2
+        text-sm
+        md:order-2
+        md:w-auto
+        md:gap-3
+      ">
+
+            {/* Workouts */}
+            <li>
+              <Link
+                href="/"
+                className={
+                  pathname === "/"
+                    ? "px-4 sm:px-5 py-2 rounded-full bg-lime-950 text-lime-400 font-medium"
+                    : "px-4 sm:px-5 py-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition"
+                }
+              >
+                Workouts
+              </Link>
+            </li>
+
+
+            {/* My Plan */}
+            <li>
+              <Link
+                href="/my-plan"
+                className={
+                  pathname === "/my-plan"
+                    ? "px-4 sm:px-5 py-2 rounded-full bg-lime-950 text-lime-400 font-medium"
+                    : "px-4 sm:px-5 py-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition"
+                }
+              >
+                My Plan
+              </Link>
+            </li>
+
+          </ul>
+
+
+          {/* Right Side */}
+          <div className="
+        order-2
+        flex
+        items-center
+        gap-3
+        sm:gap-5
+        md:order-3
+        md:gap-7
+      ">
+
+            {/* Plan */}
             <Link
               href="/my-plan"
-              className={
-                pathname === "/my-plan"
-                  ? "px-5 py-2 rounded-full bg-lime-950 text-lime-400 font-medium"
-                  : "px-5 py-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition"
-              }
+              className="flex items-center gap-1.5 sm:gap-2 text-sm text-gray-300 hover:text-white transition"
             >
-              My Plan
+              <span className="hidden sm:inline">
+                Plan
+              </span>
+
+              <span className="badge border-0 bg-lime-400 text-black font-bold w-6 h-6">
+                {addToTodaysPlan.length}
+              </span>
             </Link>
-          </li>
-
-        </ul>
 
 
-        {/* Right Side */}
-        <div className="flex items-center gap-7">
+            {/* Saved */}
+            <Link
+              href="/my-plan"
+              className="flex items-center gap-1.5 sm:gap-2 text-sm text-gray-400 hover:text-white transition"
+            >
+              <span className="hidden sm:inline">
+                Saved
+              </span>
 
-          <Link
-            href="/my-plan"
-            className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition"
-          >
-            <span>Plan</span>
+              <span className="badge badge-outline text-gray-400 w-6 h-6">
+                {saveForLater.length}
+              </span>
+            </Link>
 
-            <span className="badge border-0 bg-lime-400 text-black font-bold w-6 h-6">
-              {addToTodaysPlan.length}
-            </span>
-          </Link>
-
-
-          <Link
-            href="/my-plan"
-            className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition"
-          >
-            <span>Saved</span>
-
-            <span className="badge badge-outline text-gray-400 w-6 h-6">
-              {saveForLater.length}
-            </span>
-          </Link>
+          </div>
 
         </div>
 

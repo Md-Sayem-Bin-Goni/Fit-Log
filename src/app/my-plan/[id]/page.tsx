@@ -7,20 +7,20 @@ import React from 'react';
 
 
 interface ILibraryDetailPageprops {
-  params : Promise <{id: string}>
+  params: Promise<{ id: string }>
 }
 
-const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
+const LibraryDetailPage = async ({ params }: ILibraryDetailPageprops) => {
 
   const { id } = await params
   const allLibrary = await getAllLibrary()
-  const library = allLibrary.find((library : ILibrary) => library.id === Number(id))
+  const library = allLibrary.find((library: ILibrary) => library.id === Number(id))
 
   return (
     <section className="bg-[#0d0f12] text-white min-h-screen">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-6 md:py-8">
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 md:gap-10">
 
           {/* Left Side - Image */}
           <div>
@@ -29,7 +29,15 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
               alt={library.name}
               width={700}
               height={800}
-              className="w-full h-[600px] object-cover rounded-xl"
+              className="
+            w-full
+            h-[300px]
+            sm:h-[400px]
+            md:h-[500px]
+            lg:h-[600px]
+            object-cover
+            rounded-xl
+          "
             />
           </div>
 
@@ -38,9 +46,10 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
           <div>
 
             {/* Title */}
-            <h1 className="text-3xl font-black uppercase">
+            <h1 className="text-2xl sm:text-3xl font-black uppercase">
               {library.name}
             </h1>
+
 
             {/* Description */}
             <p className="text-gray-400 text-sm leading-6 mt-2">
@@ -49,8 +58,8 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
 
 
             {/* Muscle Groups */}
-            <div className="flex gap-2 mt-4">
-              {library.muscleGroups.map((muscle: [], idx: number) => (
+            <div className="flex flex-wrap gap-2 mt-4">
+              {library.muscleGroups.map((muscle: string, idx: number) => (
                 <span
                   key={idx}
                   className="badge bg-lime-400 border-none text-black font-bold text-xs"
@@ -65,29 +74,31 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
             <div className="bg-[#151820] border border-[#292d35] rounded-xl mt-6 overflow-hidden">
 
               {/* Equipment */}
-              <div className="flex justify-between items-center px-5 py-4 border-b border-[#292d35]">
+              <div className="flex justify-between items-center gap-4 px-4 sm:px-5 py-4 border-b border-[#292d35]">
                 <span className="text-gray-400 text-xs font-bold uppercase">
                   Equipment
                 </span>
 
-                <span className="text-sm">
+                <span className="text-sm text-right">
                   {library.equipment}
                 </span>
               </div>
 
+
               {/* Difficulty */}
-              <div className="flex justify-between items-center px-5 py-4 border-b border-[#292d35]">
+              <div className="flex justify-between items-center gap-4 px-4 sm:px-5 py-4 border-b border-[#292d35]">
                 <span className="text-gray-400 text-xs font-bold uppercase">
                   Difficulty
                 </span>
 
-                <span className="text-sm">
+                <span className="text-sm text-right">
                   {library.difficulty}
                 </span>
               </div>
 
+
               {/* Sets */}
-              <div className="flex justify-between items-center px-5 py-4 border-b border-[#292d35]">
+              <div className="flex justify-between items-center gap-4 px-4 sm:px-5 py-4 border-b border-[#292d35]">
                 <span className="text-gray-400 text-xs font-bold uppercase">
                   Sets
                 </span>
@@ -97,8 +108,9 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
                 </span>
               </div>
 
+
               {/* Reps */}
-              <div className="flex justify-between items-center px-5 py-4 border-b border-[#292d35]">
+              <div className="flex justify-between items-center gap-4 px-4 sm:px-5 py-4 border-b border-[#292d35]">
                 <span className="text-gray-400 text-xs font-bold uppercase">
                   Reps
                 </span>
@@ -108,8 +120,9 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
                 </span>
               </div>
 
+
               {/* Duration */}
-              <div className="flex justify-between items-center px-5 py-4 border-b border-[#292d35]">
+              <div className="flex justify-between items-center gap-4 px-4 sm:px-5 py-4 border-b border-[#292d35]">
                 <span className="text-gray-400 text-xs font-bold uppercase">
                   Duration
                 </span>
@@ -119,8 +132,9 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
                 </span>
               </div>
 
+
               {/* Calories */}
-              <div className="flex justify-between items-center px-5 py-4 border-b border-[#292d35]">
+              <div className="flex justify-between items-center gap-4 px-4 sm:px-5 py-4 border-b border-[#292d35]">
                 <span className="text-gray-400 text-xs font-bold uppercase">
                   Calories
                 </span>
@@ -130,8 +144,9 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
                 </span>
               </div>
 
+
               {/* Rating */}
-              <div className="flex justify-between items-center px-5 py-4">
+              <div className="flex justify-between items-center gap-4 px-4 sm:px-5 py-4">
                 <span className="text-gray-400 text-xs font-bold uppercase">
                   Rating
                 </span>
@@ -145,34 +160,48 @@ const LibraryDetailPage = async ({ params } : ILibraryDetailPageprops) => {
 
 
             {/* Instructions */}
-            <div className="mt-7">
+            <div className="mt-6 md:mt-7">
 
               <h2 className="font-bold uppercase text-sm tracking-wide">
                 Instructions
               </h2>
 
-              <ol className="list-decimal list-inside mt-4 space-y-3 text-gray-400 text-sm">
-                {library.instructions.map((instruction : [], index: number) => (
-                  <li key={index}>
-                    {instruction}
-                  </li>
-                ))}
+              <ol className="list-decimal pl-5 mt-4 space-y-3 text-gray-400 text-sm leading-6">
+                {library.instructions.map(
+                  (instruction: string, index: number) => (
+                    <li key={index}>
+                      {instruction}
+                    </li>
+                  )
+                )}
               </ol>
 
             </div>
 
 
             {/* Buttons */}
-            <div className="flex gap-4 mt-8">
+            <div
+              className="
+            flex
+            flex-col
+            sm:flex-row
+            gap-3 sm:gap-4
+            mt-7 md:mt-8
+          "
+            >
+              <AddToTodaysPlan
+                key={library.id}
+                library={library}
+              />
 
-              <AddToTodaysPlan key={library.id} library={library} />
-              <SaveForLater key={library.name} library={library}/>
-
-
-
+              <SaveForLater
+                key={library.name}
+                library={library}
+              />
             </div>
 
           </div>
+
         </div>
 
       </div>
