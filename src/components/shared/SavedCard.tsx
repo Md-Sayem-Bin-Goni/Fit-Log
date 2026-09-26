@@ -18,9 +18,9 @@ const SelectedLibraryCard = ({ library }: { library: ILibrary }) => {
 
     }
 
-      const handleViewDetail=()=>{
-            toast.info("Rederecting Details page")
-        }
+    const handleViewDetail = () => {
+        toast.info("Rederecting Details page")
+    }
 
 
     return (
@@ -84,9 +84,9 @@ const SelectedLibraryCard = ({ library }: { library: ILibrary }) => {
                         href={`/my-plan/${library.id}`}
                         className="flex-1 sm:flex-none"
                     >
-                        <button 
-                        onClick={handleViewDetail}
-                        className="btn btn-outline rounded-full px-5 lg:px-7 border-gray-600 text-gray-200 w-full">
+                        <button
+                            onClick={handleViewDetail}
+                            className="btn btn-outline rounded-full px-5 lg:px-7 border-gray-600 text-gray-200 w-full">
                             View Details
                         </button>
                     </Link>

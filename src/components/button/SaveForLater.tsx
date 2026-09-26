@@ -5,7 +5,7 @@ import { ILibrary } from '@/types/library';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const SaveForLater = ({ library } :  {library: ILibrary}) => {
+const SaveForLater = ({ library }: { library: ILibrary }) => {
 
     const { saveForLater, setSaveForLater } = useContext(LibraryContext);
 
@@ -13,24 +13,24 @@ const SaveForLater = ({ library } :  {library: ILibrary}) => {
 
     const handleAddToSaveForLater = () => {
 
-        if (isAdded) {
-            toast.error("Already Saved!");
-            return;
-        }
 
-        setSaveForLater([...saveForLater,library]);
-        setIsAdded(true);
-        toast.success("Added to Save for Later");
+        if (saveForLater.find(item => item.id === library.id)) {
+            toast.error("Already Saved!");
+        }
+        else {
+            toast.success(`Added to save for later`)
+            setSaveForLater([...saveForLater, library])
+            setIsAdded(true)
+        }
     };
 
     return (
         <button
             onClick={handleAddToSaveForLater}
             className={`btn border-none text-black
-                ${
-                    isAdded
-                        ? "bg-gray-300 cursor-not-allowed"
-                        : "bg-lime-400 hover:bg-lime-300"
+                ${isAdded
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-lime-400 hover:bg-lime-300"
                 }
             `}
         >

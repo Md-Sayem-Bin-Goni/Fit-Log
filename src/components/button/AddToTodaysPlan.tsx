@@ -12,20 +12,24 @@ const AddToTodaysPlan = ({ library }: { library: ILibrary }) => {
 
     const handleAddToTodaysPlan = () => {
 
-        if (isAdded) {
-            toast.error("Already Added!");
-            return;
-        }
 
-        if (addToTodaysPlan.length > 5)
-        {
+
+
+
+        if (addToTodaysPlan.length >= 5) {
             toast.error("You reached daily limit")
         }
 
 
-        setAddToTodaysPlan([...addToTodaysPlan, library])
-        setIsAdded(true)
-        toast.success(`Added to Todays Plan`)
+        if (addToTodaysPlan.find(item => item.id === library.id)) {
+            toast.error("Already Added!");
+        }
+        else {
+            toast.success(`Added to Todays Plan`)
+            setAddToTodaysPlan([...addToTodaysPlan, library])
+            setIsAdded(true)
+        }
+
     }
 
     return (
@@ -37,8 +41,10 @@ const AddToTodaysPlan = ({ library }: { library: ILibrary }) => {
                     : "bg-lime-400 hover:bg-lime-300"
                 }`
             }
+
         >
             {isAdded ? "Added to Plan" : "Add to Today's Plan"}
+
         </button>
     );
 };

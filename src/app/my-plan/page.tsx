@@ -9,10 +9,7 @@ import SavedCard from "@/components/shared/SavedCard";
 import { ILibrary } from "@/types/library";
 
 const MyPlanPage = () => {
-    const {
-        addToTodaysPlan,
-        saveForLater
-    } = useContext(LibraryContext);
+    const { addToTodaysPlan, saveForLater } = useContext(LibraryContext);
 
     const [activeTab, setActiveTab] = useState("today");
 
@@ -29,8 +26,7 @@ const MyPlanPage = () => {
         0
     );
 
-    const [sortBy, setSortBy] =
-        useState<"Duration" | "Calories" | "Rating">("Duration");
+    const [sortBy, setSortBy] = useState<"Duration" | "Calories" | "Rating">("Duration");
 
     const sortLibrary = (library: ILibrary[]) => {
         const sortedLibrary = [...library];
@@ -116,11 +112,10 @@ const MyPlanPage = () => {
                             <button
                                 role="tab"
                                 onClick={() => setActiveTab("today")}
-                                className={`tab flex-1 sm:flex-none ${
-                                    activeTab === "today"
+                                className={`tab flex-1 sm:flex-none ${activeTab === "today"
                                         ? "tab-active bg-[#20252d] text-white"
                                         : "text-gray-500"
-                                }`}
+                                    }`}
                             >
                                 Today's Plan
                             </button>
@@ -128,11 +123,10 @@ const MyPlanPage = () => {
                             <button
                                 role="tab"
                                 onClick={() => setActiveTab("saved")}
-                                className={`tab flex-1 sm:flex-none ${
-                                    activeTab === "saved"
+                                className={`tab flex-1 sm:flex-none ${activeTab === "saved"
                                         ? "tab-active bg-[#20252d] text-white"
                                         : "text-gray-500"
-                                }`}
+                                    }`}
                             >
                                 Saved
                             </button>
@@ -149,9 +143,9 @@ const MyPlanPage = () => {
                                 onChange={(e) =>
                                     setSortBy(
                                         e.target.value as
-                                            | "Duration"
-                                            | "Calories"
-                                            | "Rating"
+                                        | "Duration"
+                                        | "Calories"
+                                        | "Rating"
                                     )
                                 }
                                 className="select select-sm bg-[#171b22] border-[#303640] w-full sm:w-auto"
